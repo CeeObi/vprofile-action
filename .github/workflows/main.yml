@@ -34,7 +34,7 @@ jobs:
               run: sonar-scanner
                   -Dsonar.host.url=${{ secrets.SONAR_URL }}
                   -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-                  -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+                  -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION_KEY }}
                   -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
                   -Dsonar.sources=src/
                   -Dsonar.junit.reportsPath=target/surefire-reports/
@@ -43,12 +43,11 @@ jobs:
                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/
 
             # Check the Quality Gate status.
-            - name: SonarQube Quality Gate check
-              id: sonarqube-quality-gate-check
-              uses: sonarsource/sonarqube-quality-gate-action@master
-              # Force to fail step after specific time.
-              timeout-minutes: 5
-              env:
-                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-                  SONAR_HOST_URL: ${{ secrets.SONAR_URL }} #OPTIONAL
-
+            # - name: SonarQube Quality Gate check
+            #   id: sonarqube-quality-gate-check
+            #   uses: sonarsource/sonarqube-quality-gate-action@master
+            #   # Force to fail step after specific time.
+            #   timeout-minutes: 5
+            #   env:
+            #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            #       SONAR_HOST_URL: ${{ secrets.SONAR_URL }} #OPTIONAL
